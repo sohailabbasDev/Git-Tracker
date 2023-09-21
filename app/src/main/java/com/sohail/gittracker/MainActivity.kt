@@ -7,7 +7,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.navigation.compose.rememberNavController
 import com.sohail.gittracker.ui.theme.GitTrackerTheme
-import com.sohail.gittracker.ui.theme.presentation.navigation.MainNavigationGraph
+import com.sohail.gittracker.presentation.navigation.MainNavigationGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalFoundationApi
