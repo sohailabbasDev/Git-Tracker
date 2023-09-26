@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sohail.gittracker.ui.theme.GitMain
 
+//A simple column that will be used many times which will take composable that will be inside of a column
 @Composable
 fun CommonColumn(inside : @Composable () -> Unit) {
     Column(

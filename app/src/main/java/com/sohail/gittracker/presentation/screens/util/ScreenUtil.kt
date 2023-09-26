@@ -5,6 +5,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+//Screen Util helper changes status color and navigation colors
 object ScreenUtil {
 
     @Composable

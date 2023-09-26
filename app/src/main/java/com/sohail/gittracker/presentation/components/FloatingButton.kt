@@ -8,6 +8,7 @@ import com.sohail.gittracker.R
 import com.sohail.gittracker.ui.theme.GitBlack
 import com.sohail.gittracker.ui.theme.GitWhite
 
+//Floating button with Icon
 @Composable
 fun FloatingButton(onClicked: () -> Unit) {
     FloatingActionButton(onClick = onClicked, containerColor = GitBlack) {

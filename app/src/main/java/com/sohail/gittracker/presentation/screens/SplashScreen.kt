@@ -24,6 +24,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(navHostController: NavHostController) {
 
+    //This launched effect will automatically take to home screen after 1.5 secons
     LaunchedEffect(Unit){
         delay(1500)
         navHostController.popBackStack()
@@ -32,6 +33,7 @@ fun SplashScreen(navHostController: NavHostController) {
 
     ScreenUtil.ChangeStatusAndNavBarColour(color = GitMain, darkIcons = false)
 
+    //column with logo, a splash screen
     Column(
         modifier = Modifier
             .fillMaxSize()

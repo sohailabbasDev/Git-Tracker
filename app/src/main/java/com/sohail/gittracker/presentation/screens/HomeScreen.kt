@@ -62,6 +62,7 @@ import com.sohail.gittracker.presentation.screens.util.ScreenUtil
 import com.sohail.gittracker.util.Resource
 import com.sohail.gittracker.util.Status
 
+//Home screen
 @ExperimentalFoundationApi
 @ExperimentalMaterial3Api
 @Composable
@@ -76,17 +77,22 @@ fun HomeScreen(
 
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.not_found))
 
+    //Represents the state of list
     val state by viewModel.getReposState.collectAsState()
 
     Scaffold(modifier = Modifier.fillMaxSize(),
         containerColor = GitGray,
         floatingActionButton = {
+
+            //Floating button
             FloatingButton {
                 viewModel.showDialog(!viewModel.isDialogShowing)
                 Log.d("tagged", "HomeScreen: ${viewModel.isDialogShowing}")
             }
         },
         topBar = {
+
+            //Top Bar with a centered text
             CenterAlignedTopAppBar(
                 modifier = Modifier.fillMaxWidth(),
                 title = { Text(text = "Repositories", style = MaterialTheme.typography.bodyLarge) },
@@ -95,7 +101,11 @@ fun HomeScreen(
         }
     ) {
         when(viewModel.repoListState.value){
+
+            //if it is success it will show the success views
             is Resource.Success -> {
+
+                //In success which is lazy Column of repositories
                 LazyColumn(modifier = Modifier
                     .fillMaxSize()
                     .padding(top = it.calculateTopPadding())){
@@ -111,6 +121,8 @@ fun HomeScreen(
                 }
             }
             is Resource.Error -> {
+
+                //When it is error show error messages
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
@@ -120,6 +132,8 @@ fun HomeScreen(
                 }
             }
             is Resource.Loading -> {
+
+                //When it si loading show circular progress
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
@@ -129,6 +143,8 @@ fun HomeScreen(
                 }
             }
             is Resource.Initial -> {
+
+                //Initial state when there is no repo added
                 Column(modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -139,6 +155,7 @@ fun HomeScreen(
         }
     }
 
+    //isDialogShowing is from view model that handles dialog showing
     if (viewModel.isDialogShowing) {
         Dialog(
             onDismissRequest = { viewModel.isDialogShowing },
@@ -152,8 +169,11 @@ fun HomeScreen(
                     elevation = CardDefaults.cardElevation(6.dp)
                 )
                 {
+                    //This state is of dialogs screen, what can dialog contain and all that stuff
                     when (viewModel.state.value) {
                         is Resource.Initial -> {
+
+                            //Initial
                             CommonColumn {
                                 Spacer(modifier = Modifier.height(12.dp))
                                 OutlinedTextField(
@@ -205,12 +225,16 @@ fun HomeScreen(
                         }
 
                         is Resource.Loading -> {
+
+                            //When loading with circular Progress
                             CommonColumn {
                                 CircularProgressIndicator(color = GitBlack)
                             }
                         }
 
                         is Resource.Success -> {
+
+                            //Success State showing repo
                             CommonColumn {
                                 if (viewModel.state.value.data != null){
                                     when(viewModel.dbState.value){
@@ -248,6 +272,8 @@ fun HomeScreen(
                         }
 
                         is Resource.Error -> {
+
+                            //Error when there is no repo or failed to load repo
                             CommonColumn{
                                 if (viewModel.state.value.message!!.contains("404")) {
                                     LottieAnimation(

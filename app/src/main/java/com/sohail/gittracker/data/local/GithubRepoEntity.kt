@@ -3,6 +3,7 @@ package com.sohail.gittracker.data.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+// ROOM DB Entity
 @Entity
 data class GithubRepoEntity(
     val name : String,

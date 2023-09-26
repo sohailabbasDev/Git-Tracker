@@ -22,37 +22,50 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+//Git repo view model
 @HiltViewModel
 class GitRepoViewModel @Inject constructor(private val gitRepoUseCases : GitRepoUseCases) : ViewModel() {
 
+    //state of repo inside a dialog
     var state = mutableStateOf<Resource<GithubRepo?>>(Resource.Initial())
         private set
 
+    //state of Db
     var dbState = mutableStateOf<Status>(Status.Initial())
         private set
 
+    //state of repo state which will have all the repos
     private val _getRepoState = MutableStateFlow<List<GithubRepoEntity>>(emptyList())
     val getReposState : StateFlow<List<GithubRepoEntity>> = _getRepoState.asStateFlow()
 
+    //Repo list state to observe the state of the list
     var repoListState = mutableStateOf<Resource<List<GithubRepoEntity>>>(Resource.Initial())
         private set
 
+    //repo names entered in dialog
     var repoName = mutableStateOf("")
         private set
+
+    //repo owner name entered in dialog
     var ownerName = mutableStateOf("")
         private set
 
+    //is dialog showing toggle boolean
     var isDialogShowing by mutableStateOf(false)
         private set
 
+    //all the jobs used
     private var getRepoJob: Job? = null
     private var addRepoJob: Job? = null
     private var getAllReposJob: Job? = null
 
     init {
+
+        //gets all the repos
         getAllRepos()
     }
 
+    // finds the repo and updates the state
     fun findRepo(owner: String, repoName: String){
         getRepoJob?.cancel()
         getRepoJob = gitRepoUseCases.getGitRepoUseCase(owner, repoName).onEach {result ->
@@ -73,6 +86,7 @@ class GitRepoViewModel @Inject constructor(private val gitRepoUseCases : GitRepo
         }.launchIn(viewModelScope)
     }
 
+    //adds the repo to view model
     fun addRepoToDb(githubRepoEntity: GithubRepoEntity){
         addRepoJob?.cancel()
         addRepoJob = gitRepoUseCases.addRepoToDbUseCase(githubRepoEntity = githubRepoEntity).onEach { result ->
@@ -98,6 +112,7 @@ class GitRepoViewModel @Inject constructor(private val gitRepoUseCases : GitRepo
         }.launchIn(viewModelScope)
     }
 
+    //get all the repos
     private fun getAllRepos(){
         getAllReposJob?.cancel()
         getAllReposJob = gitRepoUseCases.getAllReposFromDbUseCase().onEach {result ->
@@ -120,6 +135,7 @@ class GitRepoViewModel @Inject constructor(private val gitRepoUseCases : GitRepo
         }.launchIn(viewModelScope)
     }
 
+    //delete a repo function
     fun deleteRepo(githubRepoEntity: GithubRepoEntity){
         viewModelScope.launch {
             _getRepoState.update {
@@ -135,6 +151,7 @@ class GitRepoViewModel @Inject constructor(private val gitRepoUseCases : GitRepo
 //            }
     }
 
+    //Re initializes the state value
     fun reInit(){
         state.value = Resource.Initial()
     }
@@ -143,6 +160,7 @@ class GitRepoViewModel @Inject constructor(private val gitRepoUseCases : GitRepo
 //        dbState.value = Status.Initial()
 //    }
 
+    //toggle function of dialog boolean
     fun showDialog(dismiss : Boolean){
         isDialogShowing = dismiss
         if (!dismiss){
@@ -151,10 +169,12 @@ class GitRepoViewModel @Inject constructor(private val gitRepoUseCases : GitRepo
         }
     }
 
+    //repo name function to update repo name variable
     fun repoName(repo : String){
         repoName.value = repo
     }
 
+    //owner name update function
     fun ownerName(owner : String){
         ownerName.value = owner
     }

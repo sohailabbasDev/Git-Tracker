@@ -4,6 +4,7 @@ import com.sohail.gittracker.data.local.GithubRepoEntity
 import com.sohail.gittracker.data.remote.dto.GitRepoDto
 import com.sohail.gittracker.domain.model.GithubRepo
 
+//Converts GithubRepoEntity to GithubRepo
 fun GithubRepoEntity.toGithubRepo(): GithubRepo {
     return GithubRepo(
         name = name,
@@ -12,6 +13,7 @@ fun GithubRepoEntity.toGithubRepo(): GithubRepo {
     )
 }
 
+//converts GithubRepo to GithubRepo
 fun GitRepoDto.toGithubRepo() : GithubRepo {
     return GithubRepo(
         name = name,
@@ -20,6 +22,7 @@ fun GitRepoDto.toGithubRepo() : GithubRepo {
     )
 }
 
+//Converts GithubRepo to GithubRepoEntity
 fun GithubRepo.toGithubRepoEntity() : GithubRepoEntity {
     return GithubRepoEntity(
         name = name,

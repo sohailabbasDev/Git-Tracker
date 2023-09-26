@@ -43,6 +43,7 @@ import com.sohail.gittracker.ui.theme.GitRed
 import com.sohail.gittracker.ui.theme.GitWhite
 import com.sohail.gittracker.domain.model.GithubRepo
 
+//Repository Card That will have a image and two texts which is name and description of a repo
 @ExperimentalMaterial3Api
 @Composable
 fun RepositoryCard(

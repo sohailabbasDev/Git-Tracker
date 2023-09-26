@@ -10,6 +10,7 @@ import com.sohail.gittracker.ui.theme.GitTrackerTheme
 import com.sohail.gittracker.presentation.navigation.MainNavigationGraph
 import dagger.hilt.android.AndroidEntryPoint
 
+//Main activity with navigation graph setup
 @ExperimentalFoundationApi
 @ExperimentalMaterial3Api
 @AndroidEntryPoint
@@ -17,9 +18,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            //This is our controller
             val navController = rememberNavController()
+
             GitTrackerTheme {
-                // A surface container using the 'background' color from the theme
+                //Navigation is setup here
                 MainNavigationGraph(navHostController = navController)
             }
         }

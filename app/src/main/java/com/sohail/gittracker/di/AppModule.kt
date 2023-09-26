@@ -24,6 +24,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    //This provides GitApi
     @Provides
     @Singleton
     fun provideGitApi(): GitApi {
@@ -34,9 +35,10 @@ object AppModule {
             .create()
     }
 
+    //This Provides GithubRepoDatabase
     @Provides
     @Singleton
-    fun provideNoteDatabase(app: Application): GithubRepoDatabase {
+    fun provideGithubRepoDatabase(app: Application): GithubRepoDatabase {
         return Room.databaseBuilder(
             app,
             GithubRepoDatabase::class.java,
@@ -44,6 +46,7 @@ object AppModule {
         ).build()
     }
 
+    //This provides GitRepositoryImpl
     @Provides
     @Singleton
     fun provideGitRepository(api: GitApi, db : GithubRepoDatabase) : GitRepository {
@@ -51,6 +54,7 @@ object AppModule {
     }
 
 
+    //This provides GitRepoUseCases
     @Provides
     @Singleton
     fun provideGitRepoUseCases(

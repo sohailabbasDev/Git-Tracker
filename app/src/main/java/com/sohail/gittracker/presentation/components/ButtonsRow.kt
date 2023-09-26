@@ -16,6 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.sohail.gittracker.ui.theme.GitBlack
 
+
+//This composable represents Buttons Row That will have two buttons
 @Composable
 fun ButtonsRow(buttonOne : () -> Unit, buttonTwo : () -> Unit, textOne : String, textTwo : String) {
     Spacer(modifier = Modifier.height(12.dp))
@@ -25,6 +27,8 @@ fun ButtonsRow(buttonOne : () -> Unit, buttonTwo : () -> Unit, textOne : String,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
 //        viewModel.showDialog(false)
+
+        //Button 1
         Button(
             onClick = buttonOne ,
             shape = RoundedCornerShape(6.dp),
@@ -35,6 +39,8 @@ fun ButtonsRow(buttonOne : () -> Unit, buttonTwo : () -> Unit, textOne : String,
         ) {
             Text(text = textOne, color = Color.White)
         }
+
+        //Button 2
         Button(
             onClick = buttonTwo,
 //            {

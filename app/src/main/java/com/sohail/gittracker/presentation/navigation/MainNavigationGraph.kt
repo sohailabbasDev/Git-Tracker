@@ -11,6 +11,7 @@ import com.sohail.gittracker.presentation.navigation.util.Graph
 import com.sohail.gittracker.presentation.navigation.util.MainRoutes
 import com.sohail.gittracker.presentation.screens.HomeScreen
 
+//Main Navigation Graph that will show all the necessary composables
 @ExperimentalFoundationApi
 @ExperimentalMaterial3Api
 @Composable

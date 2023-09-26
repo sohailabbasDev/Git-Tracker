@@ -1,5 +1,6 @@
 package com.sohail.gittracker.data.remote.dto
 
+//My gitRepo DTO
 data class GitRepoDto(
     val allow_forking: Boolean,
     val archive_url: String,
